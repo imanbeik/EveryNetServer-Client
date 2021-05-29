@@ -24,12 +24,12 @@ async def forwarder():
                                         headers=full_request['headers'],
                                         data=full_request['params'])
 
-                response = {'text': ans.text, 'headers': ans.headers, 'code': ans.status_code}
+                response = {'text': ans.text, 'headers': ans.headers, 'code': ans.status_code, 'id': full_request['id']}
                 response_json = json.dumps(response)
 
                 await websocket.send(response_json)
 
-            elif message["type"] == "alert":
+            elif message["type"] == "message":
                 print(message["data"])
 
 
