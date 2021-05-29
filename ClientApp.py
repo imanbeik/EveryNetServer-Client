@@ -29,7 +29,7 @@ async def forwarder():
 
                 await websocket.send(response_json)
 
-            elif message["type"] == "message":
+            elif message["type"] == "alert":
                 print(message["data"])
 
 
