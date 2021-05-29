@@ -24,7 +24,11 @@ async def forwarder():
                                         headers=full_request['headers'],
                                         data=full_request['params'])
 
-                response = {'text': ans.text, 'headers': ans.headers, 'code': ans.status_code, 'id': full_request['id']}
+                headers = {}
+                for k, v in ans.headers.items():
+                    headers[k] = v
+                
+                response = {'text': ans.text, 'headers': headers, 'code': ans.status_code, 'id': full_request['id']}
                 response_json = json.dumps(response)
 
                 await websocket.send(response_json)
