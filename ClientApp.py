@@ -2,6 +2,7 @@ import websockets
 import asyncio
 import requests
 import json
+import base64
 
 ACCESS_TOKEN = None
 PORT = None
@@ -28,9 +29,9 @@ async def forwarder():
                 for k, v in ans.headers.items():
                     headers[k] = v
                 
-                response = {'text': ans.text, 'headers': headers, 'code': ans.status_code, 'id': full_request['id']}
+                response = {'content': base64.b64encode(ans.content).decode('ascii'), 'headers': headers, 'code': ans.status_code, 'id': full_request['id']}
                 response_json = json.dumps(response)
-
+                
                 await websocket.send(response_json)
 
             elif message["type"] == "alert":
