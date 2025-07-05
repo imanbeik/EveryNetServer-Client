@@ -3,11 +3,11 @@ import asyncio
 import requests
 import json
 import base64
+import config
 
 ACCESS_TOKEN = None
-PORT = None
-URI = 'ws://everynetserver.ga:8924'
-
+PORT = 80
+URI = f'ws://{config.SERVER_DOMAIN}:8080'
 
 async def forwarder():
     global PORT, URI
@@ -42,8 +42,9 @@ if __name__ == "__main__":
     PORT = input("Enter port you wanna requests forward to it: ")
     ACCESS_TOKEN = input("Enter your access token: ")
 
+
     try:
-        asyncio.get_event_loop().run_until_complete(forwarder())
+        asyncio.run(forwarder())
     except KeyboardInterrupt:
         pass
 
