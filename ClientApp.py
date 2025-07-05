@@ -5,6 +5,7 @@ import json
 import base64
 import config
 
+
 ACCESS_TOKEN = None
 PORT = 80
 URI = f'ws://{config.SERVER_DOMAIN}:8080'
